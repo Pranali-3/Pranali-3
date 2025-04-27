@@ -4,10 +4,9 @@ export class InventoryPage {
   constructor(private page: Page) {}
 
   async addItemToCart(itemName: string) {
-    await this.page.locator(`text=${itemName}`).first().click();
-    await this.page.click('.btn_inventory');
-  }
-
+  const item = this.page.locator('.inventory_item').filter({ hasText: itemName });
+  await item.locator('button').click();
+}
   async openCart() {
     await this.page.click('.shopping_cart_link');
   }
