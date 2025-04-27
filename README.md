@@ -14,6 +14,7 @@ This repository contains end-to-end test automation for [SauceDemo](https://www.
 - npm (v8+)
 - Playwright (auto-installed via npm)
 - Git
+- Google Chrome (for `test:chrome`
 
 ## 🚀 Setup & Run
 
@@ -30,4 +31,8 @@ npx playwright test --headed
 # View HTML report
 npx playwright show-report
 
-
+## Installation
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/your-repo-url.git
+   cd saucedemo-playwright-tests
