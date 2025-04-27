@@ -1,19 +1,13 @@
 {
-  "name": "playwright_automation",
+  "name": "saucedemo-playwright-tests",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
-    "test:report": "npx playwright show-report",
     "test:chrome": "npx playwright test --project=GoogleChrome",
-    "test:chrome:headed": "npx playwright test --project=GoogleChrome --headed"
+    "test:chrome:headed": "npx playwright test --project=GoogleChrome --headed",
+    "test:report": "npx playwright show-report"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.52.0",
-    "@types/node": "^22.14.1"
+    "@playwright/test": "^1.19.0"
   }
 }
