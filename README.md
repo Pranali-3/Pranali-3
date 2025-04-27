@@ -1,38 +1,66 @@
-# Playwright Test Automation for SauceDemo
+This repository contains Playwright end-to-end (E2E) automated tests for SauceDemo.com.
 
-This repository contains end-to-end test automation for [SauceDemo](https://www.saucedemo.com/) using Playwright.
+📋 Test Scenarios Covered
+Verify sorting order Z-A on the "All Items" page.
 
-## 📋 Features Covered
+Verify price sorting High → Low on the "All Items" page.
 
-- Z-A Sorting Verification
-- Price (High to Low) Sorting Verification
-- Add Items to Cart & Checkout Flow
+Add multiple items to the cart and validate the checkout journey.
 
-## 🛠 Prerequisites
+🚀 Tech Stack
+Playwright
+TypeScript
+GitHub Actions (for CI/CD)
 
-- Node.js (v18 recommended)
-- npm (v8+)
-- Playwright (auto-installed via npm)
-- Git
-- Google Chrome (for `test:chrome`
+🛠️ Prerequisites
+Node.js (v20.x recommended)
+npm (v9.x+)
+Browsers (automatically installed via Playwright)
 
-## 🚀 Setup & Run
+🔥 How to Setup Locally
+Clone this repository:
 
-```bash
-# Install dependencies
+bash
+Copy
+Edit
+git clone https://github.com/your-username/Sauce-code-Demo.git
+cd Sauce-code-Demo
+Install dependencies:
+
+bash
+Copy
+Edit
 npm install
+Install Playwright browsers:
 
-# Run all tests (headless)
+bash
+npx playwright install
+Run the tests:
+
+bash
 npx playwright test
+Open the test report manually if needed:
 
-# Run all tests (headed for debug)
-npx playwright test --headed
-
-# View HTML report
+bash
 npx playwright show-report
+🎯 Running Specific Tests
+Run only one file:
 
-## Installation
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/your-repo-url.git
-   cd saucedemo-playwright-tests
+bash
+npx playwright test tests/checkout-journey.spec.ts
+Run in headed mode (browser visible):
+
+bash
+npx playwright test --headed
+⚡ GitHub Actions
+CI runs Playwright tests automatically on each push to the main branch.
+Test reports are published to GitHub Pages for easy viewing.
+
+🖥️ View Live Reports
+After each successful run, the Playwright HTML Report will be available at:
+https://your-username.github.io/Sauce-code-Demo/
+
+📹 Test Execution Recording
+Videos and screenshots are automatically captured tests.
+
+Traces are recorded for debugging.
