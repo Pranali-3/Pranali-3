@@ -4,12 +4,13 @@ export default defineConfig({
   use: {
     baseURL: 'https://www.saucedemo.com',
     trace: 'retain-on-failure',
+    video: 'on', // Enable video recording for each test
   },
   projects: [
     {
       name: 'GoogleChrome',
       use: {
-        channel: 'chrome', // this uses actual Chrome (not Chromium)
+        channel: 'chrome', // Run tests in actual Chrome browser
       },
     },
   ],
