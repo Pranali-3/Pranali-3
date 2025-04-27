@@ -4,6 +4,6 @@ export class CartPage {
   constructor(private page: Page) {}
 
   async checkout() {
-    await this.page.click('.checkout_button');
+    await this.page.click('[data-test="checkout"]');
   }
 }
