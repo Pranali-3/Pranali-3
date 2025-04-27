@@ -4,7 +4,7 @@ import { InventoryPage } from '../pages/inventory.page';
 import { CartPage } from '../pages/cart.page';
 import { CheckoutPage } from '../pages/checkout.page';
 
-test('Complete purchase flow on SauceDemo', async ({ page }) => {
+test('Add multiple items and complete checkout', async ({ page }) => {
   const loginPage = new LoginPage(page);
   const inventoryPage = new InventoryPage(page);
   const cartPage = new CartPage(page);
@@ -19,7 +19,7 @@ test('Complete purchase flow on SauceDemo', async ({ page }) => {
 
   await cartPage.checkout();
   await checkoutPage.fillInformation('John', 'Doe', '12345');
-  await checkoutPage.finish();
+  await checkoutPage.finishCheckout();
 
-  await expect(page.locator('.complete-header')).toHaveText('Thank you for your order!');
+  expect(await checkoutPage.isOrderComplete()).toBeTruthy();
 });
