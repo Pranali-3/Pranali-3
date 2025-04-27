@@ -3,20 +3,14 @@ import { Page } from '@playwright/test';
 export class CheckoutPage {
   constructor(private page: Page) {}
 
-  async fillInfo(first: string, last: string, zip: string) {
-    await this.page.fill('[data-test="firstName"]', first);
-    await this.page.fill('[data-test="lastName"]', last);
-    await this.page.fill('[data-test="postalCode"]', zip);
-    await this.page.click('[data-test="continue"]');
+  async fillInformation(firstName: string, lastName: string, postalCode: string) {
+    await this.page.fill('#first-name', firstName);
+    await this.page.fill('#last-name', lastName);
+    await this.page.fill('#postal-code', postalCode);
+    await this.page.click('.btn_primary');
   }
 
-  async finishCheckout() {
-    await this.page.click('[data-test="finish"]');
-  }
-
-  async assertSuccess() {
-    await this.page.waitForSelector('.complete-header');
-    const text = await this.page.textContent('.complete-header');
-    expect(text).toContain('THANK YOU FOR YOUR ORDER');
+  async finish() {
+    await this.page.click('.btn_action');
   }
 }
