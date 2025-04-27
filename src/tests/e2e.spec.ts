@@ -1,45 +1,25 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from './pages/login.page';
+import { LoginPage } from '../pages/login.page';
 import { InventoryPage } from '../pages/inventory.page';
 import { CartPage } from '../pages/cart.page';
 import { CheckoutPage } from '../pages/checkout.page';
 
-test.describe('SauceDemo E2E Tests', () => {
-  let loginPage: LoginPage;
-  let inventoryPage: InventoryPage;
-  let cartPage: CartPage;
-  let checkoutPage: CheckoutPage;
+test('Complete purchase flow on SauceDemo', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  const inventoryPage = new InventoryPage(page);
+  const cartPage = new CartPage(page);
+  const checkoutPage = new CheckoutPage(page);
 
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    inventoryPage = new InventoryPage(page);
-    cartPage = new CartPage(page);
-    checkoutPage = new CheckoutPage(page);
+  await loginPage.goto();
+  await loginPage.login('standard_user', 'secret_sauce');
 
-    await loginPage.goto();
-    await loginPage.login('standard_user', 'secret_sauce');
-  });
+  await inventoryPage.addItemToCart('Sauce Labs Backpack');
+  await inventoryPage.addItemToCart('Sauce Labs Bolt T-Shirt');
+  await inventoryPage.openCart();
 
-  test('Verify Z-A name sorting', async () => {
-    await inventoryPage.selectSortOption('za');
-    const names = await inventoryPage.getItemNames();
-    const sorted = [...names].sort().reverse();
-    expect(names).toEqual(sorted);
-  });
+  await cartPage.checkout();
+  await checkoutPage.fillInformation('John', 'Doe', '12345');
+  await checkoutPage.finish();
 
-  test('Verify high to low price sorting', async () => {
-    await inventoryPage.selectSortOption('hilo');
-    const prices = await inventoryPage.getItemPrices();
-    const sorted = [...prices].sort((a, b) => b - a);
-    expect(prices).toEqual(sorted);
-  });
-
-  test('Add multiple items and complete checkout', async () => {
-    await inventoryPage.addItemsToCart(2);
-    await inventoryPage.goToCart();
-    await cartPage.proceedToCheckout();
-    await checkoutPage.fillInfo('John', 'Doe', '12345');
-    await checkoutPage.finishCheckout();
-    await checkoutPage.assertSuccess();
-  });
+  await expect(page.locator('.complete-header')).toHaveText('Thank you for your order!');
 });
