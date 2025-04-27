@@ -5,6 +5,7 @@ export default defineConfig({
     baseURL: 'https://www.saucedemo.com',
     trace: 'retain-on-failure',
     video: 'on', // Enable video recording for each test
+    screenshot : 'on' ,
   },
   projects: [
     {
